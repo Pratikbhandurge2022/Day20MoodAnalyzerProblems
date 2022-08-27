@@ -17,7 +17,6 @@ namespace MoodAnalyzerTest
             //Assert
             Assert.AreEqual(Expected, result);
         }
-
         [TestMethod]
         public void GivenHappyMessage_WhenAnyMood_ShouldReturnHAPPY()
         {
@@ -29,7 +28,6 @@ namespace MoodAnalyzerTest
             //Assert
             Assert.AreEqual(Expected, result);
         }
-
         [TestMethod]
         public void GivenAnyMessage_WhenAnyMood_ShouldReturnHAPPY()
         {
@@ -41,19 +39,35 @@ namespace MoodAnalyzerTest
             //Assert
             Assert.AreEqual(Expected, result);
         }
-
         [TestMethod]
         [DataRow("null")]
         public void GivenNULLMessage_WhenANULL_ShouldReturnHAPPY(string message)
         {
             //Arrange
             string Expected = "Happy";
-            Program program = new Program(message);
+            Program moodAnalyser = new Program(message);
             //Act
-            string result = program.AnalyseMood();
+            string result = moodAnalyser.AnalyseMood();
             //Assert
             Assert.AreEqual(Expected, result);
         }
+        [TestMethod]
+        [DataRow("")]
+        public void GivenEmptyMessage_WhenEmpty_ShouldThrowException(string message)
+        {
+            try
+            {
+                //Arrange
+                Program program = new Program(message);
+                //Act
+                string result = program.AnalyseMood();
+                //Assert
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual("Mood should not be empty", e.Message);
+            }
 
+        }
     }
 }
