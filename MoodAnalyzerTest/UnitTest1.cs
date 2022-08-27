@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MoodAnalyzerProblems;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace MoodAnalyzerTest
 {
@@ -11,9 +12,9 @@ namespace MoodAnalyzerTest
         {
             //Arrange
             string Expected = "SAD";
-            Program program = new Program("I am in Sad Mood");
+            MoodAnalyser MoodAnalysers = new MoodAnalyser("I am in Sad Mood");
             //Act
-            string result = program.AnalyseMood();
+            string result = MoodAnalysers.AnalyseMood();
             //Assert
             Assert.AreEqual(Expected, result);
         }
@@ -22,9 +23,9 @@ namespace MoodAnalyzerTest
         {
             //Arrange
             string Expected = "HAPPY";
-            Program program = new Program("I am in Happy Mood");
+            MoodAnalyser MoodAnalysers = new MoodAnalyser("I am in Happy Mood");
             //Act
-            string result = program.AnalyseMood();
+            string result = MoodAnalysers.AnalyseMood();
             //Assert
             Assert.AreEqual(Expected, result);
         }
@@ -33,9 +34,9 @@ namespace MoodAnalyzerTest
         {
             //Arrange
             string Expected = "HAPPY";
-            Program program = new Program("I am in Any Mood");
+            MoodAnalyser MoodAnalysers = new MoodAnalyser("I am in Any Mood");
             //Act
-            string result = program.AnalyseMood();
+            string result = MoodAnalysers.AnalyseMood();
             //Assert
             Assert.AreEqual(Expected, result);
         }
@@ -45,7 +46,7 @@ namespace MoodAnalyzerTest
         {
             //Arrange
             string Expected = "Happy";
-            Program moodAnalyser = new Program(message);
+            MoodAnalyser moodAnalyser = new MoodAnalyser(message);
             //Act
             string result = moodAnalyser.AnalyseMood();
             //Assert
@@ -58,9 +59,9 @@ namespace MoodAnalyzerTest
             try
             {
                 //Arrange
-                Program program = new Program(message);
+                MoodAnalyser MoodAnalysers = new MoodAnalyser(message);
                 //Act
-                string result = program.AnalyseMood();
+                string result = MoodAnalysers.AnalyseMood();
                 //Assert
             }
             catch (MoodAnalyserException e)
@@ -68,6 +69,13 @@ namespace MoodAnalyzerTest
                 Assert.AreEqual("Mood should not be empty", e.Message);
             }
 
+        }
+        [TestMethod]
+        public void GivenMoodAnalyseClassName_ShouldReturnMoodAnalyserObject()
+        {
+            object expected = new MoodAnalyser();
+            object obj = MoodAnalyserFactory.CreateeMoodAnalyse("MoodAnalyser.MoodAnalysers", "MoodAnalysers");
+            expected.Equals(obj);
         }
     }
 }
