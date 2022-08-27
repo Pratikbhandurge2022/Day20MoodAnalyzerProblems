@@ -53,5 +53,10 @@ namespace MoodAnalyzerProblems
                 throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUBH_CLASS, "Class Not Found ");
             }
         }
+
+        internal static string InvokeAnalyseMood(string v1, string v2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
